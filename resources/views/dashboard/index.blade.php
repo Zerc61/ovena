@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patisserie — Selamat Datang</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/dashboard/style.css')}}">
+</head>
+<body>
+
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-logo">Ove<span>na</span></div>
+        <div class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#produk">Produk</a>
+            <a href="#cookies">Cookies</a>
+            <a href="/home" class="nav-cta">Pesan</a>
+        </div>
+        <div class="mobile-toggle" id="mobileToggle" role="button" aria-label="Toggle menu" aria-expanded="false" tabindex="0">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <div class="nav-mobile-backdrop" id="navBackdrop"></div>
+    <div class="nav-mobile-overlay" id="navMobileOverlay">
+        <a href="#home">Home</a>
+        <a href="#produk">Produk</a>
+        <a href="#cookies">Cookies</a>
+        <a href="/home" class="nav-cta">Pesan</a>
+    </div>
+
+    <!-- SECTION 1 — BROWNIES -->
+    <section class="hero-section section-1 section-enter-up" id="home">
+        <div class="ambient-glow"></div>
+        <div class="section-inner">
+            <div class="text-content">
+                <div class="subtitle">Coklat Premium</div>
+                <h1>Selamat<br><span class="indent">Datang</span></h1>
+                <div class="section-divider"></div>
+                <p class="desc">Setiap gigitan adalah perjalanan rasa — dari brownies coklat pekat yang meleleh di lidah, hingga aroma hangat yang mengingatkan pada momen terindah.</p>
+            </div>
+            <div class="image-content" data-parallax="0.05">
+                <img src="{{asset('img/1.png')}}" alt="Tumpukan Brownies Coklat">
+            </div>
+        </div>
+        <div class="section-number">01 / 05</div>
+        <div class="scroll-indicator" id="scrollIndicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- SECTION 2 — CHEESECAKE -->
+    <section class="hero-section section-2 section-enter-up">
+        <div class="ambient-glow"></div>
+        <div class="section-inner">
+            <div class="text-content">
+                <div class="subtitle reveal">Dibuat dengan Cinta</div>
+                <h1 class="reveal reveal-delay-1">Kelembutan<br><em>di dalam</em><br>setiap sajian</h1>
+                <div class="section-divider reveal reveal-delay-2"></div>
+                <p class="desc reveal reveal-delay-3">Cheesecake kami dibuat dari bahan-bahan terpilih — cream cheese lembut, vanilla asli, dan taburan buah segar yang menyempurnakan setiap potongan.</p>
+            </div>
+            <div class="image-content reveal-img" data-parallax="0.04">
+                <img src="{{asset('img/2.png')}}" alt="Cheesecake dengan Buah">
+            </div>
+        </div>
+        <div class="section-number">02 / 05</div>
+    </section>
+
+    <!-- SECTION 3 — PASTRY -->
+    <section class="hero-section section-3 section-enter-up">
+        <div class="ambient-glow"></div>
+        <div class="section-inner">
+            <div class="text-content">
+                <div class="subtitle reveal">Koleksi Spesial</div>
+                <h1 class="reveal reveal-delay-1">Kue<br><em>Berkualitas</em><br>Untuk Momen<br><em>Berharga</em></h1>
+                <div class="section-divider reveal reveal-delay-2"></div>
+                <p class="desc reveal reveal-delay-3">Dari pastry berlapis-lapis hingga kue artisan — setiap kreasi kami lahir dari pengalaman bertahun-tahun dan passion tanpa batas.</p>
+                <a href="/home" class="cta-btn reveal reveal-delay-4">
+                    <span>Pesan Sekarang</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+            <div class="image-content reveal-img" data-parallax="0.03">
+                <img src="{{asset('img/3 (1).png')}}" alt="Aneka Potongan Kue">
+            </div>
+        </div>
+        <div class="section-number">03 / 05</div>
+    </section>
+
+    <!-- SECTION 4 — BOLA KUANANTI -->
+    <section class="hero-section section-4 section-enter-up" id="produk">
+        <div class="ambient-glow"></div>
+        <div class="section-inner">
+            <div class="text-content">
+                <div class="subtitle reveal">Produk Kami</div>
+                <h1 class="reveal reveal-delay-1">Bola <em>Kuananti</em></h1>
+                <div class="section-divider reveal reveal-delay-2" style="margin: 32px auto 0; transform-origin: center;"></div>
+                <p class="desc reveal reveal-delay-3">Lima varian bola-bola manis yang dibuat dengan teliti — dari adonan lembut hingga topping premium yang memanjakan mata dan lidah.</p>
+            </div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-card-img"><img src="{{asset('img/5 (1).png')}}" alt="Bola Coklat"></div>
+                    <div class="product-card-name">Coklat</div>
+                    <div class="product-card-tag">Best Seller</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-card-img"><img src="{{asset('img/6 (1).png')}}" alt="Bola Matcha"></div>
+                    <div class="product-card-name">Matcha</div>
+                    <div class="product-card-tag">Premium</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-card-img"><img src="{{asset('img/7 (1).png')}}" alt="Bola Taro"></div>
+                    <div class="product-card-name">Taro</div>
+                    <div class="product-card-tag">Favorit</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-card-img"><img src="{{asset('img/8 (1).png')}}" alt="Bola Red Velvet"></div>
+                    <div class="product-card-name">Red Velvet</div>
+                    <div class="product-card-tag">Spesial</div>
+                </div>
+                <div class="product-card">
+                    <div class="product-card-img"><img src="{{asset('img/9 (1).png')}}" alt="Bola Original"></div>
+                    <div class="product-card-name">Original</div>
+                    <div class="product-card-tag">Klasik</div>
+                </div>
+            </div>
+        </div>
+        <div class="section-number">04 / 05</div>
+    </section>
+
+    <!-- SECTION 5 — COOKIES -->
+    <section class="hero-section section-5 section-enter-up" id="cookies">
+        <div class="ambient-glow"></div>
+        <div class="section-inner">
+            <div class="text-content">
+                <div class="subtitle reveal">Handmade Cookies</div>
+                <h1 class="reveal reveal-delay-1">Cookies crafted<br>with <em>love</em> and<br><em>premium</em> ingredients</h1>
+                <div class="section-divider reveal reveal-delay-2"></div>
+                <div class="flavor-list">
+                    <div class="flavor-item">
+                        <span class="flavor-dot dot-redvelvet"></span>
+                        <span class="flavor-name">Red Velvet</span>
+                        <svg class="flavor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                    <div class="flavor-item">
+                        <span class="flavor-dot dot-chocolate"></span>
+                        <span class="flavor-name">Chocolate</span>
+                        <svg class="flavor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                    <div class="flavor-item">
+                        <span class="flavor-dot dot-matcha"></span>
+                        <span class="flavor-name">Matcha Mochi</span>
+                        <svg class="flavor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                    <div class="flavor-item">
+                        <span class="flavor-dot dot-nutella"></span>
+                        <span class="flavor-name">Nutella</span>
+                        <svg class="flavor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                    <div class="flavor-item">
+                        <span class="flavor-dot dot-biscoff"></span>
+                        <span class="flavor-name">Biscoff</span>
+                        <svg class="flavor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                    <div class="flavor-item">
+                        <span class="flavor-dot dot-chocomarsh"></span>
+                        <span class="flavor-name">Choco Marshmallow</span>
+                        <svg class="flavor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </div>
+                </div>
+                <a href="#" class="cta-btn cta-btn-outline reveal reveal-delay-4">
+                    <span>Pesan Cookies</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+            </div>
+            <div class="image-content reveal-img" data-parallax="0.03">
+                <img src="{{asset('img/4 (1).png')}}" alt="Koleksi Cookies Premium">
+            </div>
+        </div>
+        <div class="section-number">05 / 05</div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-section section-enter-up">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <h3>Ove<span>na</span></h3>
+                <p>Menyajikan kelezatan autentik sejak 2020. Setiap kue dibuat dengan tangan, bahan premium, dan cinta yang tulus untuk Anda.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigasi</h4>
+                <a href="#home">Beranda</a>
+                <a href="#produk">Produk</a>
+                <a href="#cookies">Cookies</a>
+                <a href="#">Tentang Kami</a>
+            </div>
+            <div class="footer-col">
+                <h4>Kontak</h4>
+                <a href="#">info@patisserie.id</a>
+                <a href="#">+62 812 3456 7890</a>
+                <a href="#">Jakarta, Indonesia</a>
+            </div>
+            <div class="footer-col">
+                <h4>Ikuti Kami</h4>
+                <a href="#">Instagram</a>
+                <a href="#">TikTok</a>
+                <a href="#">WhatsApp</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2025 Ovena. Semua hak dilindungi.</span>
+            <span>Dibuat dengan ☕ dan ❤️</span>
+        </div>
+    </footer>
+
+     <script src="{{asset('js/dashboard/script.js')}}"></script>
+
+</body>
+</html>
