@@ -1,5 +1,38 @@
 @extends('layouts.app')
 @section('content')
+
+<style>
+    .badge-cod {
+        background: rgba(245, 158, 11, 0.1); /* Warna Orange/Kuning */
+        color: #f59e0b;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .badge-paid {
+        background: rgba(34, 197, 94, 0.1); /* Warna Hijau */
+        color: #22c55e;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .badge-default {
+        background: rgba(201, 169, 110, 0.1); /* Warna Emas Ovena */
+        color: var(--gold);
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+</style>
 <div style="max-width:900px;margin:0 auto;padding:28px 20px 40px;">
     <h1 style="font-size:24px;font-weight:600;color:var(--cream);margin-bottom:24px;">Pesanan Saya</h1>
     @if($orders->isEmpty())
@@ -18,7 +51,15 @@
             </div>
             <div style="text-align:right;">
                 <div style="font-size:14px;font-weight:700;color:var(--gold);">{{ number_format($order->total_harga,0,'.','.') }}</div>
-                <span class="status-badge status-{{ $order->status }}" style="display:inline-block;margin-top:4px;">{{ ucfirst($order->status) }}</span>
+               <td>
+    @if($order->status === 'diproses' && $order->metode_pembayaran === 'cod')
+        <span class="badge-cod">Menunggu Pembayaran COD</span>
+    @elseif($order->status === 'dibayar')
+        <span class="badge-paid">Lunas (Dibayar)</span>
+    @else
+        <span class="badge-default">{{ ucfirst($order->status) }}</span>
+    @endif
+</td>
             </div>
         </a>
         @endforeach

@@ -22,19 +22,22 @@ class PaymentController extends Controller
         return view('payment.show', compact('order')); 
     }
 
-    public function simulate(Order $order)
+    public function simulate(Request $request, $id)
     {
-        abort_if($order->user_id !== auth()->id(), 403);
+        $order = \App\Models\Order::findOrFail($id);
 
-        // Berdasarkan migration-mu, status yang tersedia: 
-        // ['pending', 'dibayar', 'diproses', 'dikirim', 'selesai', 'dibatalkan']
-        
-        // Kita ubah statusnya menjadi 'dibayar' atau 'diproses'
-        $order->update([
-            'status' => 'dibayar' 
-        ]);
+        // Jika metode COD, status langsung menjadi 'diproses'
+        if ($order->metode_pembayaran === 'cod') {
+            $order->update(['status' => 'diproses']);
+            $pesan = 'Pesanan COD berhasil dikonfirmasi dan sedang diproses!';
+        } else {
+            // Jika metode lain (Transfer, E-Wallet, QRIS), status menjadi 'dibayar'
+            $order->update(['status' => 'dibayar']);
+            $pesan = 'Pembayaran berhasil disimulasikan!';
+        }
 
-        return redirect()->route('orders.show', $order->id)
-            ->with('success', 'Pembayaran berhasil dikonfirmasi (Simulasi)!');
+        // Sesuaikan route redirect di bawah ini dengan halaman riwayat pesanan/home kamu
+               return redirect()->route('orders.show', $order->id)
+            ->with('success', 'Pembayaran berhasil dikonfirmasi (Simulasi)!', $pesan);
     }
 }

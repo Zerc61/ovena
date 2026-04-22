@@ -62,17 +62,18 @@
     @endif
 
 
-    {{-- Voucher Spesial Section --}}
-    @if(isset($vouchers) && $vouchers->isNotEmpty())
+  @if(isset($vouchers) && $vouchers->isNotEmpty())
     <section style="margin-bottom:40px;" class="fade-up">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
             <div style="width:40px;height:3px;background:var(--gold);border-radius:2px;"></div>
             <h2 style="font-size:20px;font-weight:600;color:var(--cream);">Voucher Spesial</h2>
         </div>
         
-        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:16px;">
+        {{-- Pembungkus Slider Horizontal --}}
+        <div class="voucher-slider" style="display:flex; gap:16px; overflow-x:auto; padding-bottom:12px; scroll-snap-type:x mandatory; scroll-behavior:smooth;">
             @foreach($vouchers as $v)
-            <div style="background:rgba(201,169,110,0.06); border:1px dashed rgba(201,169,110,0.3); border-radius:14px; padding:20px; position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:space-between; transition:all 0.3s;" onmouseover="this.style.background='rgba(201,169,110,0.1)'; this.style.borderColor='var(--gold)';" onmouseout="this.style.background='rgba(201,169,110,0.06)'; this.style.borderColor='rgba(201,169,110,0.3)';">
+            {{-- Kartu Voucher --}}
+            <div style="min-width:300px; flex-shrink:0; scroll-snap-align:start; background:rgba(201,169,110,0.06); border:1px dashed rgba(201,169,110,0.3); border-radius:14px; padding:20px; position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:space-between; transition:all 0.3s;" onmouseover="this.style.background='rgba(201,169,110,0.1)'; this.style.borderColor='var(--gold)';" onmouseout="this.style.background='rgba(201,169,110,0.06)'; this.style.borderColor='rgba(201,169,110,0.3)';">
                 
                 {{-- Efek Sobekan Tiket di Kiri & Kanan --}}
                 <div style="position:absolute; top:50%; left:-10px; transform:translateY(-50%); width:20px; height:20px; background:var(--brown-deep); border-radius:50%; border-right:1px dashed rgba(201,169,110,0.3);"></div>
@@ -102,6 +103,19 @@
             @endforeach
         </div>
     </section>
+
+    {{-- Tambahan CSS untuk menyembunyikan Scrollbar agar terlihat lebih rapi --}}
+    <style>
+        .voucher-slider::-webkit-scrollbar {
+            display: none; /* Untuk Chrome, Safari, dan Opera */
+        }
+        .voucher-slider {
+            -ms-overflow-style: none;  /* Untuk Internet Explorer dan Edge */
+            scrollbar-width: none;  /* Untuk Firefox */
+        }
+
+        
+    </style>
     @endif
 
     {{-- Best Seller --}}
@@ -142,15 +156,24 @@
             <div style="width:40px;height:3px;background:var(--gold);border-radius:2px;"></div>
             <h2 style="font-size:20px;font-weight:600;color:var(--cream);">Kategori</h2>
         </div>
-        <div class="cat-grid" style="display:grid;grid-template-columns:repeat(8,1fr);gap:6px;">
-            <a href="/home" class="cat-card {{ !request('kategori') ? 'active' : '' }}">
-                <div class="cat-icon-wrap"><i data-lucide="grid-2x2" style="width:20px;height:20px;color:var(--gold);"></i></div>
-                <span class="cat-label" style="font-size:11px;font-weight:500;color:var(--cream-muted);text-align:center;">Semua</span>
+        
+        {{-- Desain Kategori Teks (Pill Style) --}}
+        <div style="display:flex; flex-wrap:wrap; gap:10px;">
+            <a href="/home" 
+               style="padding:10px 24px; border-radius:30px; font-size:13px; font-weight:600; text-decoration:none; transition:all 0.3s; 
+               {{ !request('kategori') ? 'background:var(--gold); color:var(--brown-deep); box-shadow:0 4px 15px rgba(201,169,110,0.3); border:1px solid var(--gold);' : 'background:rgba(201,169,110,0.06); border:1px solid rgba(201,169,110,0.2); color:var(--cream-muted);' }}"
+               onmouseover="this.style.borderColor='var(--gold)'; this.style.color='{{ !request('kategori') ? 'var(--brown-deep)' : 'var(--gold)' }}';" 
+               onmouseout="this.style.borderColor='{{ !request('kategori') ? 'var(--gold)' : 'rgba(201,169,110,0.2)' }}'; this.style.color='{{ !request('kategori') ? 'var(--brown-deep)' : 'var(--cream-muted)' }}';">
+                Semua
             </a>
+            
             @foreach($categories as $cat)
-            <a href="/home?kategori={{ $cat->id }}" class="cat-card {{ request('kategori') == $cat->id ? 'active' : '' }}">
-                <div class="cat-icon-wrap"><i data-lucide="wheat" style="width:20px;height:20px;color:var(--gold);"></i></div>
-                <span class="cat-label" style="font-size:11px;font-weight:500;color:var(--cream-muted);text-align:center;line-height:1.3;">{{ $cat->nama_kategori }}</span>
+            <a href="/home?kategori={{ $cat->id }}" 
+               style="padding:10px 24px; border-radius:30px; font-size:13px; font-weight:600; text-decoration:none; transition:all 0.3s; 
+               {{ request('kategori') == $cat->id ? 'background:var(--gold); color:var(--brown-deep); box-shadow:0 4px 15px rgba(201,169,110,0.3); border:1px solid var(--gold);' : 'background:rgba(201,169,110,0.06); border:1px solid rgba(201,169,110,0.2); color:var(--cream-muted);' }}"
+               onmouseover="this.style.borderColor='var(--gold)'; this.style.color='{{ request('kategori') == $cat->id ? 'var(--brown-deep)' : 'var(--gold)' }}';" 
+               onmouseout="this.style.borderColor='{{ request('kategori') == $cat->id ? 'var(--gold)' : 'rgba(201,169,110,0.2)' }}'; this.style.color='{{ request('kategori') == $cat->id ? 'var(--brown-deep)' : 'var(--cream-muted)' }}';">
+                {{ $cat->nama_kategori }}
             </a>
             @endforeach
         </div>

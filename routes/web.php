@@ -27,6 +27,7 @@ Route::get('/', function() {
 });
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/produk/{product}', [ProductController::class, 'show'])->name('products.show');
+Route::post('/produk/{product}/review', [ProductController::class, 'storeReview'])->name('reviews.store');
 
 // ── Auth required ──
 Route::middleware('auth')->group(function () {

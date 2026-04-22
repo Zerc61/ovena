@@ -31,6 +31,7 @@ class AuthController extends Controller
         return back()->withErrors(['email' => 'Email atau password salah.'])->onlyInput('email');
     }
 
+
     public function showRegister()
     {
         if (auth()->check()) return redirect('/');
@@ -65,6 +66,6 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/')->with('success', 'Berhasil logout.');
+        return redirect('/home')->with('success', 'Berhasil logout.');
     }
 }

@@ -32,8 +32,7 @@ class HomeController extends Controller
             $query->whereNull('kuota')
                   ->orWhere('kuota', '>', 0);
         })
-        ->latest()
-        ->take(3) // Batasi 3 saja agar rapi di halaman depan
+        ->latest()// Batasi 3 saja agar rapi di halaman depan
         ->get();
 
     // Best seller — hanya query kalau ada data order_details

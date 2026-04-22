@@ -87,11 +87,9 @@
         <div style="max-width:1200px;margin:0 auto;padding:0 20px;">
             <div style="display:flex;align-items:center;justify-content:space-between;height:56px;">
                 <a href="{{ route('home') }}" style="display:flex;align-items:center;gap:8px;text-decoration:none;">
-                    <div style="width:32px;height:32px;border-radius:8px;border:1px solid rgba(201,169,110,0.15);display:flex;align-items:center;justify-content:center;">
-                        <span style="color:var(--gold);font-family:'Playfair Display',serif;font-size:15px;font-weight:700;">O</span>
-                    </div>
-                    <span style="font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:var(--cream);">Ovena</span>
-                    <span style="font-size:10px;color:var(--maroon);background:rgba(74,18,18,0.3);padding:2px 8px;border-radius:4px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-left:4px;">Admin</span>
+                    
+                    <span style="font-family:'Playfair Display',serif;font-size:25px;color:var(--cream);">OVE<span style="color: #c9a96e">NA</span></span>
+                    <span style="font-size:10px;color:rgb(192, 20, 20);background:rgba(128, 52, 52, 0.411);padding:2px 8px;border-radius:4px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-left:4px;margin-top:2px;">Admin</span>
                 </a>
                 <div style="display:flex;align-items:center;gap:10px;">
                     <span style="font-size:12px;color:var(--cream-muted);">{{ auth()->user()->nama }}</span>

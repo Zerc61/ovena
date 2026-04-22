@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('banners', function (Blueprint $table) {
     $table->id();
+     $table->foreignId('product_id')->nullable()->constrained('products')->nullOnDelete();
     $table->string('judul'); // Teks besar di hero
     $table->string('subjudul')->nullable(); // Teks kecil penjelas
     $table->string('gambar_url'); // Gambar background

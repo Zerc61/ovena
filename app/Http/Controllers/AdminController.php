@@ -12,14 +12,36 @@ use Illuminate\Support\Facades\Storage;
 class AdminController extends Controller
 {
     // ── Dashboard ──
-    public function dashboard()
+  public function dashboard()
     {
-        $totalPenjualan = Order::where('status', 'selesai')->sum('total_harga');
-        $totalPesanan = Order::count();
-        $totalProduk = Product::count();
-        $pendingOrders = Order::where('status', 'pending')->count();
+        // 1. Data Statistik Dasar
+        $totalPenjualan = \App\Models\Order::where('status', 'selesai')->sum('total_harga') ?? 0;
+        $totalPesanan = \App\Models\Order::count();
+        $totalProduk = \App\Models\Product::count();
+        $pendingOrders = \App\Models\Order::where('status', 'pending')->count();
 
-        return view('admin.dashboard', compact('totalPenjualan', 'totalPesanan', 'totalProduk', 'pendingOrders'));
+        // 2. Data Ulasan Terbaru (Ambil 4 terbaru)
+        $recentReviews = \App\Models\Review::with(['user', 'product'])->latest()->take(4)->get();
+
+        // 3. Data Best Seller #1 (Berdasarkan jumlah terbeli di OrderDetail)
+        $bestSellerData = \App\Models\OrderDetail::select('product_id', \Illuminate\Support\Facades\DB::raw('SUM(kuantitas) as total_sold'))
+            ->groupBy('product_id')
+            ->orderByDesc('total_sold')
+            ->first();
+
+        // Jika belum ada pesanan, ambil produk random/pertama sebagai fallback
+        $bestSeller = $bestSellerData ? \App\Models\Product::find($bestSellerData->product_id) : \App\Models\Product::first();
+        $bestSellerSold = $bestSellerData ? $bestSellerData->total_sold : 0;
+
+        return view('admin.dashboard', compact(
+            'totalPenjualan', 
+            'totalPesanan', 
+            'totalProduk', 
+            'pendingOrders',
+            'recentReviews',
+            'bestSeller',
+            'bestSellerSold'
+        ));
     }
 
     // ── Produk ──

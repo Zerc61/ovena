@@ -43,6 +43,10 @@
                 <h1>Selamat<br><span class="indent">Datang</span></h1>
                 <div class="section-divider"></div>
                 <p class="desc">Setiap gigitan adalah perjalanan rasa — dari brownies coklat pekat yang meleleh di lidah, hingga aroma hangat yang mengingatkan pada momen terindah.</p>
+                 <a href="/produk/1" class="cta-btn reveal reveal-delay-4">
+                    <span>Pesan Sekarang</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
             </div>
             <div class="image-content" data-parallax="0.05">
                 <img src="{{asset('img/1.png')}}" alt="Tumpukan Brownies Coklat">
@@ -64,6 +68,10 @@
                 <h1 class="reveal reveal-delay-1">Kelembutan<br><em>di dalam</em><br>setiap sajian</h1>
                 <div class="section-divider reveal reveal-delay-2"></div>
                 <p class="desc reveal reveal-delay-3">Cheesecake kami dibuat dari bahan-bahan terpilih — cream cheese lembut, vanilla asli, dan taburan buah segar yang menyempurnakan setiap potongan.</p>
+                 <a href="/produk/2" class="cta-btn reveal reveal-delay-4">
+                    <span>Pesan Sekarang</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
             </div>
             <div class="image-content reveal-img" data-parallax="0.04">
                 <img src="{{asset('img/2.png')}}" alt="Cheesecake dengan Buah">
@@ -81,7 +89,7 @@
                 <h1 class="reveal reveal-delay-1">Kue<br><em>Berkualitas</em><br>Untuk Momen<br><em>Berharga</em></h1>
                 <div class="section-divider reveal reveal-delay-2"></div>
                 <p class="desc reveal reveal-delay-3">Dari pastry berlapis-lapis hingga kue artisan — setiap kreasi kami lahir dari pengalaman bertahun-tahun dan passion tanpa batas.</p>
-                <a href="/home" class="cta-btn reveal reveal-delay-4">
+                <a href="/produk/9" class="cta-btn reveal reveal-delay-4">
                     <span>Pesan Sekarang</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -174,7 +182,7 @@
                         <svg class="flavor-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </div>
                 </div>
-                <a href="#" class="cta-btn cta-btn-outline reveal reveal-delay-4">
+                <a href="/home?kategori=5" class="cta-btn cta-btn-outline reveal reveal-delay-4">
                     <span>Pesan Cookies</span>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>

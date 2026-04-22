@@ -20,19 +20,65 @@
         .bg-blob-2{width:500px;height:500px;background:rgba(74,18,18,0.12);bottom:-15%;left:-8%;}
         .gold-line{height:1px;background:linear-gradient(to right,transparent,rgba(201,169,110,0.25),transparent);}
 
-        .site-header{position:sticky;top:0;z-index:50;background:rgba(26,14,8,0.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(201,169,110,0.06);}
-        .site-header.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.3);}
-        .main-search{background:rgba(44,24,16,0.7);border:1px solid rgba(201,169,110,0.1);border-radius:10px;transition:all .3s;}
-        .main-search:focus-within{border-color:rgba(201,169,110,0.35);box-shadow:0 0 0 3px rgba(201,169,110,0.06);}
-        .main-search input{background:transparent;border:none;outline:none;color:var(--cream);font-family:'Inter',sans-serif;font-size:13px;width:100%;}
-        .main-search input::placeholder{color:rgba(200,185,168,0.3);}
-        .hdr-btn{width:38px;height:38px;border-radius:10px;border:1px solid rgba(201,169,110,0.06);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--cream-muted);transition:all .25s;position:relative;text-decoration:none;}
-        .hdr-btn:hover{color:var(--gold);border-color:rgba(201,169,110,0.2);background:rgba(201,169,110,0.06);}
-        .hdr-badge{position:absolute;top:-3px;right:-3px;min-width:17px;height:17px;border-radius:8px;background:var(--maroon);color:white;font-size:9px;font-weight:700;display:none;align-items:center;justify-content:center;padding:0 4px;}
-        .nav-item{font-size:13px;color:var(--cream-muted);cursor:pointer;transition:color .25s;padding:6px 0;position:relative;font-weight:500;text-decoration:none;}
-        .nav-item:hover,.nav-item.active{color:var(--gold);}
-        .nav-item::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--gold);transition:width .3s;border-radius:1px;}
-        .nav-item:hover::after,.nav-item.active::after{width:100%;}
+       /* --- HEADER MINIMALIS --- */
+        .site-header {
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(26, 14, 8, 0.8);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201, 169, 110, 0.05);
+            transition: all 0.3s ease;
+        }
+        .header-inner {
+            display: flex; align-items: center; justify-content: space-between; height: 72px;
+        }
+
+        /* Logo */
+        .brand-logo {
+            display: flex; align-items: center; gap: 10px; text-decoration: none;
+        }
+        .brand-mark {
+            color: var(--gold); font-family: 'Playfair Display', serif; font-size: 22px; font-style: italic; font-weight: 600;
+        }
+        .brand-text {
+            font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: var(--cream); letter-spacing: 2px; text-transform: uppercase;
+        }
+
+        /* Navigasi Tengah */
+        .desk-nav {
+            display: none; align-items: center; gap: 36px;
+        }
+        @media (min-width: 768px) { .desk-nav { display: flex; } }
+        .nav-item {
+            font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; color: var(--cream-muted); text-decoration: none; position: relative; padding: 6px 0; transition: color 0.3s;
+        }
+        .nav-item:hover, .nav-item.active { color: var(--gold); }
+        .nav-item::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 1px; background: var(--gold); transition: width 0.3s ease;
+        }
+        .nav-item:hover::after, .nav-item.active::after { width: 100%; }
+
+        /* Aksi Kanan & Search */
+        .header-actions { display: flex; align-items: center; gap: 20px; }
+        
+        .minimal-search {
+            display: none; align-items: center; border-bottom: 1px solid rgba(201, 169, 110, 0.15); padding-bottom: 4px; width: 140px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @media (min-width: 640px) { .minimal-search { display: flex; } }
+        .minimal-search:focus-within { border-color: var(--gold); width: 180px; }
+        .minimal-search input {
+            background: transparent; border: none; outline: none; color: var(--cream); font-size: 12px; width: 100%; padding: 0 8px; font-family: 'Inter', sans-serif;
+        }
+        .minimal-search input::placeholder { color: rgba(200, 185, 168, 0.3); font-style: italic; text-transform: lowercase; letter-spacing: 0.5px; }
+
+        /* Icon Buttons */
+        .hdr-icon {
+            color: var(--cream-muted); background: transparent; border: none; cursor: pointer; transition: all 0.3s; position: relative; display: flex; align-items: center; text-decoration: none; padding: 2px;
+        }
+        .hdr-icon:hover { color: var(--gold); transform: translateY(-1px); }
+        .hdr-badge {
+            position: absolute; top: -4px; right: -6px; min-width: 16px; height: 16px; border-radius: 50%; background: var(--gold); color: var(--brown-deep); font-size: 9px; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid var(--brown-deep); padding: 0 4px;
+        }
+        /* --- END HEADER MINIMALIS --- */
 
         .cat-card{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 10px;border-radius:12px;cursor:pointer;transition:all .3s;border:1px solid transparent;text-decoration:none;}
         .cat-card:hover,.cat-card.active{background:rgba(201,169,110,0.06);border-color:rgba(201,169,110,0.15);}
@@ -104,64 +150,71 @@
     <div class="cursor-glow" id="cursorGlow"></div>
 
     <!-- Header -->
-    <header class="site-header" id="siteHeader">
-        <div style="max-width:1200px;margin:0 auto;padding:0 20px;">
-            <div style="display:flex;align-items:center;gap:14px;height:58px;">
-                <a href="/" style="display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0;">
-                    <div style="width:34px;height:34px;border-radius:10px;border:1px solid rgba(201,169,110,0.15);display:flex;align-items:center;justify-content:center;">
-                        <span style="color:var(--gold);font-family:'Playfair Display',serif;font-size:16px;font-weight:700;">O</span>
-                    </div>
-                    <span style="font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--cream);letter-spacing:.5px;">Ovena</span>
+   <header class="site-header" id="siteHeader">
+        <div style="max-width:1200px; margin:0 auto; padding:0 24px;">
+            <div class="header-inner">
+                
+                <a href="/" class="brand-logo">
+                       <span style="font-family:'Playfair Display',serif;font-size:25px;color:var(--cream);">OVE<span style="color: #c9a96e">NA</span></span>
                 </a>
 
-                <form action="/home" method="GET" class="main-search" style="flex:1;max-width:480px;display:flex;align-items:center;padding:0 12px;height:38px;">
-                    <i data-lucide="search" style="width:15px;height:15px;color:rgba(200,185,168,0.3);flex-shrink:0;"></i>
-                    <input type="text" name="search" placeholder="Cari roti, kue, pastry..." style="margin-left:8px;" value="{{ request('search') }}">
-                </form>
+                <nav class="desk-nav">
+                    <a href="/home" class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">Beranda</a>
+                    <a href="/home?kategori=1" class="nav-item">Roti Klasik</a>
+                    <a href="/home?kategori=2" class="nav-item">Pastry</a>
+                    <a href="/home?kategori=3" class="nav-item">Kue & Cake</a>
+                    <a href="/home?kategori=7" class="nav-item">Paket</a>
+                </nav>
 
-                <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;margin-left:auto;">
+                <div class="header-actions">
+                    <form action="/home" method="GET" class="minimal-search">
+                        <i data-lucide="search" style="width:14px; height:14px; color:rgba(200,185,168,0.5);"></i>
+                        <input type="text" name="search" placeholder="cari roti..." value="{{ request('search') }}">
+                    </form>
+
                     @guest
-    <a href="{{ route('login') }}" class="hdr-btn" title="Klik untuk Masuk">
-        Login
-    </a>
-@endguest
-                    @auth
-                        <a href="{{ route('cart.index') }}" class="hdr-btn" title="Keranjang">
-                            <i data-lucide="shopping-bag" style="width:17px;height:17px;"></i>
-                            <span class="hdr-badge" id="hCartBadge">{{ $cartCount ?? 0 }}</span>
+                        <a href="{{ route('login') }}" class="hdr-icon" title="Masuk">
+                            <i data-lucide="log-in" style="width:18px; height:18px;"></i>
                         </a>
+                    @endguest
+
+                    @auth
+                        <a href="{{ route('cart.index') }}" class="hdr-icon" title="Keranjang">
+                            <i data-lucide="shopping-bag" style="width:18px; height:18px;"></i>
+                            @if(($cartCount ?? 0) > 0)
+                                <span class="hdr-badge" id="hCartBadge">{{ $cartCount }}</span>
+                            @endif
+                        </a>
+                        
                         <div style="position:relative;" id="profileWrap">
-                            <button class="hdr-btn" title="Profil" onclick="toggleProfile()" style="width:auto;padding:0 10px;gap:6px;display:flex;align-items:center;">
-                                <i data-lucide="user" style="width:17px;height:17px;"></i>
-                                <span style="font-size:12px;font-weight:500;max-width:80px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" class="hidden sm:inline">{{ auth()->user()->nama }}</span>
-                                <i data-lucide="chevron-down" style="width:12px;height:12px;opacity:.4;"></i>
+                            <button class="hdr-icon" title="Profil" onclick="toggleProfile()" style="gap:8px; padding-right:4px;">
+                                <i data-lucide="user" style="width:18px; height:18px;"></i>
+                                <span style="font-size:12px; font-weight:500; font-family:'Inter', sans-serif; color:var(--cream-muted); max-width:90px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" class="hidden sm:block">
+                                    {{ auth()->user()->nama }}
+                                </span>
+                                <i data-lucide="chevron-down" style="width:12px; height:12px; opacity:0.5;" class="hidden sm:block"></i>
                             </button>
+                            
                             <div class="profile-dropdown" id="profileDropdown">
-                                <div style="padding:8px 12px 4px;border-bottom:1px solid rgba(201,169,110,0.06);margin-bottom:4px;">
-                                    <div style="font-size:13px;font-weight:600;color:var(--cream);">{{ auth()->user()->nama }}</div>
-                                    <div style="font-size:11px;color:rgba(200,185,168,0.4);">{{ auth()->user()->email }}</div>
+                                <div style="padding:8px 12px 4px; border-bottom:1px solid rgba(201,169,110,0.06); margin-bottom:4px;">
+                                    <div style="font-size:13px; font-weight:600; color:var(--cream);">{{ auth()->user()->nama }}</div>
+                                    <div style="font-size:11px; color:rgba(200,185,168,0.4);">{{ auth()->user()->email }}</div>
                                 </div>
                                 @if(auth()->user()->isAdmin())
-                                <a href="{{ route('admin.dashboard') }}"><i data-lucide="layout-dashboard" style="width:15px;height:15px;"></i> Admin Panel</a>
+                                    <a href="{{ route('admin.dashboard') }}"><i data-lucide="layout-dashboard" style="width:15px; height:15px;"></i> Admin Panel</a>
                                 @endif
-                                <a href="{{ route('profile.index') }}"><i data-lucide="user-circle" style="width:15px;height:15px;"></i> Profil Saya</a>
-                                <a href="{{ route('orders.index') }}"><i data-lucide="package" style="width:15px;height:15px;"></i> Pesanan Saya</a>
+                                <a href="{{ route('profile.index') }}"><i data-lucide="user-circle" style="width:15px; height:15px;"></i> Profil Saya</a>
+                                <a href="{{ route('orders.index') }}"><i data-lucide="package" style="width:15px; height:15px;"></i> Pesanan Saya</a>
                                 <div class="divider"></div>
                                 <form method="POST" action="{{ route('logout') }}" style="display:contents;">
                                     @csrf
-                                    <button type="submit"><i data-lucide="log-out" style="width:15px;height:15px;color:red;"></i> <span style="color:red;">Keluar</span></button>
+                                    <button type="submit"><i data-lucide="log-out" style="width:15px; height:15px; color:#ef4444;"></i> <span style="color:#ef4444;">Keluar</span></button>
                                 </form>
                             </div>
                         </div>
                     @endauth
                 </div>
-            </div>
-            <div class="desk-nav" style="display:flex;align-items:center;gap:24px;height:40px;border-top:1px solid rgba(201,169,110,0.04);">
-                <a href="/home" class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">Beranda</a>
-                <a href="/home?kategori=1" class="nav-item">Roti Klasik</a>
-                <a href="/home?kategori=2" class="nav-item">Pastry</a>
-                <a href="/home?kategori=3" class="nav-item">Kue & Cake</a>
-                <a href="/home?kategori=7" class="nav-item">Paket</a>
+
             </div>
         </div>
     </header>
