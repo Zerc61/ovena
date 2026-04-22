@@ -10,6 +10,7 @@ class HomeController extends Controller
  public function index()
 {
     $categories = Category::withCount('products')->get();
+   $banners = \App\Models\Banner::where('is_active', true)->latest()->get(); // <-- Ubah menjadi get()
 
     $products = Product::with('category')
         ->when(request('search'), fn($q, $s) =>
@@ -21,6 +22,19 @@ class HomeController extends Controller
         ->latest()
         ->paginate(12)
         ->withQueryString();
+
+        $vouchers = \App\Models\Voucher::where('is_active', true)
+        ->where(function($query) {
+            $query->whereNull('berlaku_sampai')
+                  ->orWhere('berlaku_sampai', '>=', \Carbon\Carbon::today());
+        })
+        ->where(function($query) {
+            $query->whereNull('kuota')
+                  ->orWhere('kuota', '>', 0);
+        })
+        ->latest()
+        ->take(3) // Batasi 3 saja agar rapi di halaman depan
+        ->get();
 
     // Best seller — hanya query kalau ada data order_details
     $bestSellers = collect();
@@ -38,6 +52,6 @@ class HomeController extends Controller
             ->get();
     }
 
-    return view('home', compact('categories', 'products', 'bestSellers'));
+    return view('home', compact('vouchers','banners','categories', 'products', 'bestSellers'));
 }
 }

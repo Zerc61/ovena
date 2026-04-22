@@ -107,6 +107,10 @@
                 <a href="{{ route('admin.products.index') }}" class="{{ request()->routeIs('admin.products.*') ? 'active' : '' }}"><i data-lucide="cake-slice" style="width:13px;height:13px;display:inline;vertical-align:-2px;margin-right:3px;"></i> Produk</a>
                 <a href="{{ route('admin.orders.index') }}" class="{{ request()->routeIs('admin.orders.*') ? 'active' : '' }}"><i data-lucide="clipboard-list" style="width:13px;height:13px;display:inline;vertical-align:-2px;margin-right:3px;"></i> Pesanan</a>
                 <a href="{{ route('admin.deliveries.index') }}" class="{{ request()->routeIs('admin.deliveries.*') ? 'active' : '' }}"><i data-lucide="truck" style="width:13px;height:13px;display:inline;vertical-align:-2px;margin-right:3px;"></i> Pengiriman</a>
+                
+                {{-- Menu Pemasaran Tambahan --}}
+                <a href="{{ route('admin.banners.index') }}" class="{{ request()->routeIs('admin.banners.*') ? 'active' : '' }}"><i data-lucide="image" style="width:13px;height:13px;display:inline;vertical-align:-2px;margin-right:3px;"></i> Banner</a>
+                <a href="{{ route('admin.vouchers.index') }}" class="{{ request()->routeIs('admin.vouchers.*') ? 'active' : '' }}"><i data-lucide="ticket" style="width:13px;height:13px;display:inline;vertical-align:-2px;margin-right:3px;"></i> Voucher</a>
             </nav>
         </div>
     </header>

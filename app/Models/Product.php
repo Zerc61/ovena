@@ -26,10 +26,13 @@ class Product extends Model
         return $this->hasMany(OrderDetail::class);
     }
 
-    public function getImageUrlAttribute()
+public function getImageUrlAttribute()
 {
     if ($this->url_gambar) {
-        return \Storage::url($this->url_gambar);
+        try { return \Storage::url($this->url_gambar); } catch(\Exception $e) {}
+        if (str_starts_with($this->url_gambar, 'http')) {
+            return $this->url_gambar;
+        }
     }
     return null;
 }

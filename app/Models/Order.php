@@ -8,7 +8,8 @@ class Order extends Model
 {
     protected $fillable = [
         'user_id', 'total_harga', 'status', 'alamat_pengiriman',
-        'no_telp_penerima', 'nama_penerima', 'metode_pembayaran', 'catatan',
+        'no_telp_penerima', 'nama_penerima', 'metode_pembayaran', 'catatan',  'voucher_id',
+    'potongan_diskon'  
     ];
 
     protected function casts(): array
@@ -30,4 +31,9 @@ class Order extends Model
     {
         return $this->hasOne(Delivery::class);
     }
+
+    public function voucher()
+{
+    return $this->belongsTo(Voucher::class);
+}
 }

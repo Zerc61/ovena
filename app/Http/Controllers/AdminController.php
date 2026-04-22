@@ -163,4 +163,115 @@ public function productUpdate(Request $request, Product $product)
         $category->delete();
         return back()->with('success', 'Kategori berhasil dihapus.');
     }
+
+    // ── Banners / Hero ──
+  // ── Banners / Hero ──
+    public function banners()
+    {
+        $banners = \App\Models\Banner::latest()->paginate(10);
+        // Ambil data produk untuk ditampilkan di dropdown pilihan banner
+        $products = \App\Models\Product::select('id', 'nama_produk')->get(); 
+        
+        return view('admin.banners.index', compact('banners', 'products'));
+    }
+
+    public function bannerStore(Request $request)
+    {
+        $validated = $request->validate([
+            'judul'      => 'required|string|max:255',
+            'subjudul'   => 'nullable|string|max:255',
+            'gambar_url' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'product_id' => 'nullable|exists:products,id', // <-- Tambahkan ini
+            'is_active'  => 'boolean',
+        ]);
+
+        $validated['is_active'] = $request->has('is_active');
+        $validated['gambar_url'] = $request->file('gambar_url')->store('banners', 'public');
+
+        \App\Models\Banner::create($validated);
+        return back()->with('success', 'Banner berhasil ditambahkan.');
+    }
+
+    public function bannerUpdate(Request $request, \App\Models\Banner $banner)
+    {
+        $validated = $request->validate([
+            'judul'      => 'required|string|max:255',
+            'subjudul'   => 'nullable|string|max:255',
+            'gambar_url' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'product_id' => 'nullable|exists:products,id', // <-- Tambahkan ini
+            'is_active'  => 'boolean',
+        ]);
+
+        $validated['is_active'] = $request->has('is_active');
+
+        if ($request->hasFile('gambar_url')) {
+            if ($banner->gambar_url && Storage::disk('public')->exists($banner->gambar_url)) {
+                Storage::disk('public')->delete($banner->gambar_url);
+            }
+            $validated['gambar_url'] = $request->file('gambar_url')->store('banners', 'public');
+        }
+
+        $banner->update($validated);
+        return back()->with('success', 'Banner berhasil diperbarui.');
+    }
+
+    public function bannerDelete(\App\Models\Banner $banner)
+    {
+        if ($banner->gambar_url && Storage::disk('public')->exists($banner->gambar_url)) {
+            Storage::disk('public')->delete($banner->gambar_url);
+        }
+        $banner->delete();
+        return back()->with('success', 'Banner berhasil dihapus.');
+    }
+
+    // ── Vouchers ──
+    public function vouchers()
+    {
+        $vouchers = \App\Models\Voucher::latest()->paginate(10);
+        return view('admin.vouchers.index', compact('vouchers'));
+    }
+
+    public function voucherStore(Request $request)
+    {
+        $validated = $request->validate([
+            'kode_voucher'   => 'required|string|max:50|unique:vouchers',
+            'tipe'           => 'required|in:persen,nominal',
+            'nilai'          => 'required|integer|min:1',
+            'min_belanja'    => 'required|integer|min:0',
+            'kuota'          => 'nullable|integer|min:1',
+            'berlaku_sampai' => 'nullable|date',
+            'is_active'      => 'boolean',
+        ]);
+
+        $validated['is_active'] = $request->has('is_active');
+        $validated['kode_voucher'] = strtoupper($validated['kode_voucher']); // Pastikan kode selalu huruf besar
+
+        \App\Models\Voucher::create($validated);
+        return back()->with('success', 'Voucher berhasil ditambahkan.');
+    }
+
+    public function voucherUpdate(Request $request, \App\Models\Voucher $voucher)
+    {
+        $validated = $request->validate([
+            'kode_voucher'   => 'required|string|max:50|unique:vouchers,kode_voucher,'.$voucher->id,
+            'tipe'           => 'required|in:persen,nominal',
+            'nilai'          => 'required|integer|min:1',
+            'min_belanja'    => 'required|integer|min:0',
+            'kuota'          => 'nullable|integer|min:1',
+            'berlaku_sampai' => 'nullable|date',
+            'is_active'      => 'boolean',
+        ]);
+
+        $validated['is_active'] = $request->has('is_active');
+        $validated['kode_voucher'] = strtoupper($validated['kode_voucher']);
+
+        $voucher->update($validated);
+        return back()->with('success', 'Voucher berhasil diperbarui.');
+    }
+
+    public function voucherDelete(\App\Models\Voucher $voucher)
+    {
+        $voucher->delete();
+        return back()->with('success', 'Voucher berhasil dihapus.');
+    }
 }

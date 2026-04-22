@@ -39,6 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
 
+    Route::post('/checkout/voucher', [CheckoutController::class, 'applyVoucher'])->name('checkout.voucher.apply');
+    Route::post('/checkout/voucher/remove', [CheckoutController::class, 'removeVoucher'])->name('checkout.voucher.remove');
+
     Route::get('/pesanan', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/pesanan/{order}', [OrderController::class, 'show'])->name('orders.show');
     Route::post('/pesanan/{order}/batalkan', [OrderController::class, 'cancelOrder'])->name('orders.cancel');
@@ -68,4 +71,15 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     Route::get('/pengiriman', [AdminController::class, 'deliveries'])->name('deliveries.index');
     Route::put('/pengiriman/{delivery}', [AdminController::class, 'deliveryUpdate'])->name('deliveries.update');
+
+    Route::get('/banners', [AdminController::class, 'banners'])->name('banners.index');
+    Route::post('/banners', [AdminController::class, 'bannerStore'])->name('banners.store');
+    Route::put('/banners/{banner}', [AdminController::class, 'bannerUpdate'])->name('banners.update');
+    Route::delete('/banners/{banner}', [AdminController::class, 'bannerDelete'])->name('banners.delete');
+
+    // ── Route Vouchers ──
+    Route::get('/vouchers', [AdminController::class, 'vouchers'])->name('vouchers.index');
+    Route::post('/vouchers', [AdminController::class, 'voucherStore'])->name('vouchers.store');
+    Route::put('/vouchers/{voucher}', [AdminController::class, 'voucherUpdate'])->name('vouchers.update');
+    Route::delete('/vouchers/{voucher}', [AdminController::class, 'voucherDelete'])->name('vouchers.delete');
 });
