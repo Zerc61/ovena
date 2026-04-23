@@ -142,12 +142,79 @@
         .mobile-fab{display:none;position:fixed;bottom:20px;right:20px;width:52px;height:52px;border-radius:14px;background:var(--gold);color:var(--brown-deep);align-items:center;justify-content:center;z-index:50;box-shadow:0 6px 24px rgba(201,169,110,0.25);cursor:pointer;border:none;transition:transform .3s;}
         .mobile-fab:hover{transform:scale(1.05);}
         @media(max-width:768px){.mobile-fab{display:flex;}.desk-nav{display:none!important;}.p-grid{grid-template-columns:repeat(2,1fr)!important;gap:10px!important;}.cat-grid{grid-template-columns:repeat(4,1fr)!important;gap:4px!important;}}
+
+        @keyframes slideIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    #ovi-messages::-webkit-scrollbar {
+        width: 4px;
+    }
+    #ovi-messages::-webkit-scrollbar-thumb {
+        background: rgba(201,169,110,0.2);
+        border-radius: 10px;
+    }
+
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    @keyframes scaleUp {
+        from { opacity: 0; transform: translate(-50%, -45%) scale(0.95); }
+        to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
     </style>
 </head>
 <body>
     <div class="bg-blob bg-blob-1"></div>
     <div class="bg-blob bg-blob-2"></div>
     <div class="cursor-glow" id="cursorGlow"></div>
+
+    <div id="ovi-container" style="font-family: 'Playfair Display', serif, sans-serif;">
+    
+    <div id="ovi-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(10, 5, 2, 0.6); backdrop-filter: blur(8px); z-index: 9997; cursor: pointer; animation: fadeIn 0.3s ease;"></div>
+
+    <div id="ovi-window" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 92%; max-width: 500px; height: 85vh; background: #1a0e08; border: 1px solid rgba(201,169,110,0.3); border-radius: 20px; flex-direction: column; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.8); z-index: 9998; animation: scaleUp 0.3s ease;">
+        
+        <div style="background: linear-gradient(135deg, var(--gold), #a67c00); padding: 20px; display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+                <div style="width: 48px; height: 48px; border-radius: 50%; background: #1a0e08; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                    <i data-lucide="bot" style="width: 26px; height: 26px; color: var(--gold);"></i>
+                </div>
+                <div>
+                    <h4 style="margin: 0; font-size: 16px; color: #1a0e08; font-weight: 800; font-family: 'Inter', sans-serif;">Ovi - Asisten Ovena</h4>
+                    <div style="font-size: 11px; color: rgba(26,14,8,0.8); display: flex; align-items: center; gap: 6px; margin-top: 2px; font-family: 'Inter', sans-serif;">
+                        <div style="width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 6px #22c55e;"></div> Selalu Siap Membantu
+                    </div>
+                </div>
+            </div>
+            <button id="ovi-close-header" style="background: rgba(26,14,8,0.1); border: none; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #1a0e08; transition: all 0.2s;">
+                <i data-lucide="x" style="width: 20px; height: 20px;"></i>
+            </button>
+        </div>
+
+        <div id="ovi-messages" style="flex: 1; padding: 24px 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; font-family: 'Inter', sans-serif;">
+            <div style="align-self: flex-start; max-width: 85%; background: rgba(201,169,110,0.1); padding: 14px 18px; border-radius: 16px 16px 16px 0; border: 1px solid rgba(201,169,110,0.1);">
+                <p style="margin: 0; font-size: 14px; color: var(--cream-muted); line-height: 1.6;">Halo! Saya Ovi. Ada yang bisa saya bantu tentang produk Ovena hari ini? 😊</p>
+            </div>
+        </div>
+
+        <div style="padding: 16px 20px; border-top: 1px solid rgba(201,169,110,0.15); background: rgba(0,0,0,0.4); font-family: 'Inter', sans-serif;">
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="ovi-input" placeholder="Ketik pertanyaan Anda di sini..." style="flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(201,169,110,0.2); border-radius: 12px; padding: 14px 16px; font-size: 14px; color: white; outline: none; transition: all 0.3s;" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='rgba(201,169,110,0.2)'">
+                <button id="ovi-send" style="background: var(--gold); border: none; border-radius: 12px; width: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    <i data-lucide="send" style="width: 20px; height: 20px; color: #1a0e08;"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <button id="ovi-toggle" class="btn-gold" style="position: fixed; bottom: 24px; right: 24px; z-index: 9999; width: 64px; height: 64px; border-radius: 50%; box-shadow: 0 10px 30px rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease;">
+        <i data-lucide="sparkles" id="ovi-icon-open" style="width: 28px; height: 28px;"></i>
+    </button>
+</div>
 
     <!-- Header -->
    <header class="site-header" id="siteHeader">
@@ -306,14 +373,186 @@
     </div>
 
     <script>
-        document.addEventListener('mousemove',e=>{const g=document.getElementById('cursorGlow');g.style.left=e.clientX+'px';g.style.top=e.clientY+'px';});
-        function toggleProfile(){document.getElementById('profileDropdown').classList.toggle('open');}
-        document.addEventListener('click',e=>{const w=document.getElementById('profileWrap');if(w&&!w.contains(e.target)){document.getElementById('profileDropdown').classList.remove('open');}});
-        const fadeObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('vis');fadeObs.unobserve(x.target);}});},{threshold:.08});
-        document.querySelectorAll('.fade-up:not(.vis)').forEach(x=>fadeObs.observe(x));
-        document.querySelectorAll('.toast#toastFlash').forEach(t=>{setTimeout(()=>{t.classList.add('out');setTimeout(()=>t.remove(),300);},3500);});
-        lucide.createIcons();
-    </script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggleBtn = document.getElementById('ovi-toggle');
+        const chatWindow = document.getElementById('ovi-window');
+        const iconOpen = document.getElementById('ovi-icon-open');
+        const iconClose = document.getElementById('ovi-icon-close');
+        
+        // Fitur Buka Tutup
+        const overlay = document.getElementById('ovi-overlay');
+        const closeHeaderBtn = document.getElementById('ovi-close-header');
+
+        function toggleChat() {
+           if (chatWindow.style.display === 'none') {
+                chatWindow.style.display = 'flex';
+                overlay.style.display = 'block';
+                document.body.style.overflow = 'hidden'; // Kunci scroll halaman belakang
+            } else {
+                chatWindow.style.display = 'none';
+                overlay.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Buka kunci scroll
+            }
+            lucide.createIcons();
+        }
+
+        // Event listener untuk buka tutup
+        toggleBtn.addEventListener('click', toggleChat);
+        closeHeaderBtn.addEventListener('click', toggleChat);
+        overlay.addEventListener('click', toggleChat); // Klik area gelap untuk menutup chat
+
+        // Fitur Kirim Pesan ke AI
+        const sendBtn = document.getElementById('ovi-send');
+        const inputField = document.getElementById('ovi-input');
+        const messagesArea = document.getElementById('ovi-messages');
+
+        function sendMessage() {
+            const text = inputField.value.trim();
+            if(!text) return;
+
+            // 1. Tampilkan pesan user ke layar
+            appendMessage('user', text);
+            inputField.value = '';
+
+            // 2. Tampilkan indikator "Ovi sedang mengetik..."
+            const typingId = 'typing-' + Date.now();
+            appendMessage('bot', '<i data-lucide="loader-2" class="spin" style="width:14px;height:14px;animation: spin 1s linear infinite;"></i> Mengetik...', typingId);
+            lucide.createIcons();
+
+            // 3. Kirim ke Backend Laravel
+            fetch('{{ route('chatbot.send') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ message: text })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Hapus indikator mengetik
+                document.getElementById(typingId).remove();
+                
+                // Tampilkan balasan AI
+                if(data.status === 'success') {
+                    appendMessage('bot', data.reply);
+                } else {
+                    appendMessage('bot', 'Aduh, koneksi Ovi terputus.');
+                }
+            })
+            .catch(error => {
+                document.getElementById(typingId).remove();
+                appendMessage('bot', 'Maaf, terjadi kesalahan jaringan.');
+            });
+        }
+
+        // Fungsi membuat kotak pesan (VERSI PINTAR DENGAN KARTU PRODUK)
+        function appendMessage(sender, text, id = '') {
+            const div = document.createElement('div');
+            div.id = id;
+            div.className = 'message-bubble';
+            div.style.maxWidth = '80%';
+            div.style.padding = '10px 14px';
+            div.style.fontSize = '13px';
+            div.style.lineHeight = '1.5';
+            div.style.marginBottom = '10px';
+            
+            if (sender === 'user') {
+                div.style.alignSelf = 'flex-end';
+                div.style.background = 'var(--gold)';
+                div.style.color = '#1a0e08';
+                div.style.borderRadius = '12px 12px 0 12px';
+                div.style.fontWeight = '500';
+            } else {
+                div.style.alignSelf = 'flex-start';
+                div.style.background = 'rgba(201,169,110,0.1)';
+                div.style.color = 'var(--cream-muted)';
+                div.style.borderRadius = '12px 12px 12px 0';
+                div.style.border = '1px solid rgba(201,169,110,0.05)';
+            }
+
+            // --- LOGIKA PARSING PRODUK ---
+            const productMatch = text.match(/\[PRODUK-(\d+)\]/);
+            
+            // Bersihkan teks asli dari kode rahasia agar tidak terlihat user
+            let cleanText = text.replace(/\[PRODUK-\d+\]/g, '');
+
+            // --- ✨ SIHIR MERAPIKAN TEKS (MARKDOWN PARSER) ✨ ---
+            // 1. Ubah **teks** menjadi Huruf Tebal (Bold)
+            cleanText = cleanText.replace(/\*\*(.*?)\*\*/g, '<strong style="color: var(--gold);">$1</strong>');
+            
+            // 2. Ubah *teks* menjadi Huruf Miring (Italic)
+            cleanText = cleanText.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            
+            // 3. Ubah Enter/Baris Baru menjadi tag <br> agar tidak numpuk
+            cleanText = cleanText.replace(/\n/g, '<br>');
+            div.innerHTML = cleanText;
+
+            messagesArea.appendChild(div);
+
+            // Jika ditemukan kode produk, tembak API untuk ambil kartunya
+            if (sender === 'bot' && productMatch) {
+                const productId = productMatch[1];
+                fetch(`/chatbot/product/${productId}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.html) {
+                            div.innerHTML += data.html; // Tempel kartu di bawah teks
+                            messagesArea.scrollTop = messagesArea.scrollHeight;
+                        }
+                    });
+            }
+            
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        // Event listener tombol send & enter
+        sendBtn.addEventListener('click', sendMessage);
+        inputField.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendMessage();
+        });
+    });
+
+    // ==========================================
+    // KODE LAINNYA DI LUAR CHATBOT
+    // ==========================================
+    document.addEventListener('mousemove', e => {
+        const g = document.getElementById('cursorGlow');
+        if(g) { g.style.left = e.clientX + 'px'; g.style.top = e.clientY + 'px'; }
+    });
+    
+    function toggleProfile(){
+        const dd = document.getElementById('profileDropdown');
+        if(dd) dd.classList.toggle('open');
+    }
+    
+    document.addEventListener('click', e => {
+        const w = document.getElementById('profileWrap');
+        const dd = document.getElementById('profileDropdown');
+        if(w && !w.contains(e.target) && dd){
+            dd.classList.remove('open');
+        }
+    });
+    
+    const fadeObs = new IntersectionObserver(e => {
+        e.forEach(x => {
+            if(x.isIntersecting){
+                x.target.classList.add('vis');
+                fadeObs.unobserve(x.target);
+            }
+        });
+    },{threshold:.08});
+    document.querySelectorAll('.fade-up:not(.vis)').forEach(x => fadeObs.observe(x));
+    
+    document.querySelectorAll('.toast#toastFlash').forEach(t => {
+        setTimeout(() => {
+            t.classList.add('out');
+            setTimeout(() => t.remove(), 300);
+        }, 3500);
+    });
+    
+    lucide.createIcons();
+</script>
     @stack('scripts')
 </body>
 </html>

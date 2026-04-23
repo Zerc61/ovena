@@ -29,6 +29,12 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/produk/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::post('/produk/{product}/review', [ProductController::class, 'storeReview'])->name('reviews.store');
 
+// Pastikan tulisannya App\Http\Controllers\ChatbotController (pakai "rs" dan garis miring)
+
+Route::post('/chatbot', [App\Http\Controllers\ChatbotController::class, 'handleChat'])->name('chatbot.send');
+
+Route::get('/chatbot/product/{id}', [App\Http\Controllers\ChatbotController::class, 'getProductCard'])->name('chatbot.product');
+
 // ── Auth required ──
 Route::middleware('auth')->group(function () {
     Route::get('/keranjang', [CartController::class, 'index'])->name('cart.index');
